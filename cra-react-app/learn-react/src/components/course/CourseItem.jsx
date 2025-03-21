@@ -1,14 +1,60 @@
-export default function CourseItem({ title, description, thumbnail }) {
-  
+// if문
+// function HeartIconBtn({ isFavorite = false }) {
+//   if (isFavorite) {
+//     return (
+//       <button className="btn">
+//         <img className="btn__img" src="/img/heart-fill-icon.svg" />
+//       </button>
+//     )
+//   }
+//   return (
+//     <button className="btn">
+//       <img className="btn__img" src="/img/heart-icon.svg" />
+//     </button>
+//   )
+// }
 
-  const isEmpty = false;
 
-  if (isEmpty) {
-    return (
-      <p>강의가 없습니다.</p>
-    )
-  }
+// null 반환 실습
+// function HeartIconBtn({ isFavorite = false }) {
+//   if (isFavorite) {
+//     return (
+//       <button className="btn">
+//         <img className="btn__img" src="/img/heart-fill-icon.svg" />
+//       </button>
+//     )
+//   }
+//   return (
+//     <button className="btn">
+//       <img className="btn__img" src="/img/heart-icon.svg" />
+//     </button>
+//   )
+// }
 
+
+function HeartIconBtn({ isFavorite = false }) {
+  return (
+    <button className="btn">
+      {/* {isFavorite ? (
+        <img className="btn__img" src="/img/heart-fill-icon.svg" />
+      ) : (
+        <img className="btn__img" src="/img/heart-icon.svg" />
+      )} */}
+      <img className="btn__img" src={isFavorite ? '/img/heart-fill-icon.svg' : '/img/heart-icon.svg'} />
+    </button>
+  )
+}
+
+function LinkIconBtn({ link }) {
+  return (
+	  <a className="btn" href={link} target="_blank" rel="noreferrer">
+	    <img className="btn__img" src="/img/link-icon.svg" />
+	  </a>
+	)
+}
+
+
+export default function CourseItem({ title, description, thumbnail, isFavorite, link}) {
   return (
     <article className="course">
       <img className="course__img" src={thumbnail} alt="강의 이미지" />
@@ -16,7 +62,12 @@ export default function CourseItem({ title, description, thumbnail }) {
         <div className="course__title">{title}</div>
         <div className="course__description">{description}</div>
       </div>
+      <div className="course__icons">
+        <HeartIconBtn isFavorite={isFavorite} />
+        <div className="course__icons">
+        {link && <LinkIconBtn link={link} />}
+      </div>
+      </div>
     </article>
   );
-
 }
