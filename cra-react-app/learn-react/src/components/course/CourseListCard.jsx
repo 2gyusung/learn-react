@@ -1,19 +1,26 @@
 import React from 'react'
+import Card from '../Card';
 import CourseItem from './CourseItem'
 
-function CourseListCard() {
+function CourseListCard({ items }) {
+
+  const [course1, course2, course3] = items;
+
   return (
-    <div className="card">
-    <div className="card__header">강의 목록</div>
-    <div className="card__body">
-      <div className="courses">
-        <CourseItem/>
-        <CourseItem/>
-        <CourseItem/> 
+    <Card title='강의 목록'>
+      <div className='courses'>
+        <CourseItem
+          {...course1}
+        />
+        <CourseItem
+          {...course2}
+        />
+        <CourseItem
+          {...course3}
+        />
       </div>
-    </div>
-  </div>
-  )
+    </Card>
+  );
 }
 
-export default CourseListCard
+export default CourseListCard;

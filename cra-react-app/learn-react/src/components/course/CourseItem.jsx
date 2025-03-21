@@ -1,18 +1,22 @@
+export default function CourseItem({ title, description, thumbnail }) {
+  
 
+  const isEmpty = false;
 
+  if (isEmpty) {
+    return (
+      <p>강의가 없습니다.</p>
+    )
+  }
 
-export default function CourseItem() {
   return (
     <article className="course">
-    <img className="course__img" src="./img/htmlcss.png" alt="" />
-    <div className="course__body">
-      <div className="course__title">
-        입문자를 위한, HTML&amp;CSS 웹 개발 입문
+      <img className="course__img" src={thumbnail} alt="강의 이미지" />
+      <div className="course__body">
+        <div className="course__title">{title}</div>
+        <div className="course__description">{description}</div>
       </div>
-      <div className="course__description">
-        웹 개발에 필요한 기본 지식을 배웁니다.{" "}
-      </div>
-    </div>
-  </article>
-  )
+    </article>
+  );
+
 }
