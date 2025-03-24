@@ -1,9 +1,19 @@
-import React from 'react'
+import { useState } from "react"
 
-const Counter = () => {
-  return (
-    <button>Counter</button>
-  )
-}
+ // 일반적으로 사용
 
-export default Counter
+export default function Counter({ onTotal }) {
+  const [counter, setCounter] = useState(0);
+
+  const handleCounter = () => {
+    setCounter(counter + 1);
+    onTotal();
+  }
+   // 상태, 로직
+   return (
+    <>
+    <button onClick={handleCounter}>Counter: {counter}</button>
+    </>
+   )
+  
+ }
