@@ -2,15 +2,13 @@ import { useState } from 'react';
 import './App.css'
 import TodoList from './components/todo/TodoList';
 
-const initialList = [
-  {id: 0, text: "HTML&CSS 공부하기", done: false },
-  {id: 1, text: "자바스크립트 공부하기", done: false },
-  
-];
 function AppTodo(props) {
   const [todoText, setTodoText] = useState('');
-  const [todos, setTodos] = useState(initialList);
-  const [copyTodos, setCopyTodos] = useState(initialList);
+  const [todos, setTodos] = useState([
+    {id: 0, text: "HTML&CSS 공부하기", done: false },
+    {id: 1, text: "자바스크립트 공부하기", done: false },
+  ]);
+  const [insertAt, setInsertAt] = useState(todos.length - 1);
 
   const handleTodoTextChange = (e) => {
     setTodoText(e.target.value);
@@ -22,6 +20,19 @@ function AppTodo(props) {
       { id: nextId, text: todoText, done: false }
     ]);
     setTodoText(''); // null, undefined [X]
+  }
+  const handleAddTodoByIndex = () => {
+    const nextId = todos.length;
+    const newTodos = [
+      // 삽입 지점 이전 항목
+      ...todos.slice(0, insertAt),
+      // 새 항목
+      { id: nextId, text: todoText, done: false },
+      // 삽입 지점 이후 항목
+      ...todos.slice(insertAt)
+    ];
+    setTodos(newTodos);
+    setName('');
   }
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -53,13 +64,23 @@ function AppTodo(props) {
   return (
     <div>
       <h2>할일목록</h2>
-      <input
-        type="text"
-        value={todoText}
-        onChange={handleTodoTextChange}
-        onKeyDown={handleKeyDown}
-      />
-      <button onClick={handleAddTodo}>추가</button>
+      <div>
+        <input
+          type="text"
+          value={todoText}
+          onChange={handleTodoTextChange}
+          onKeyDown={handleKeyDown}
+        />
+        <button onClick={handleAddTodo}>추가</button>
+      </div>
+      <div>
+        <select value={insertAt} onChange={(e) => setInsertAt(e.target.value)}>
+          {todos.map((_, index) => (
+            <option value={index}>{index} 번째</option>
+          ))}
+        </select>
+        <button onClick={handleAddTodoByIndex}>{insertAt} 번째 추가</button>
+      </div>
       <div>Preview: {todoText}</div>
 
       <TodoList
@@ -67,13 +88,6 @@ function AppTodo(props) {
         onDeleteTodo={handleDeleteTodo}
         onToggleTodo={handleToggleTodo}
       />
-
-      {/* <h2>할일목록</h2>
-      <TodoList
-        todos={copyTodos}
-        onDeleteTodo={handleDeleteTodo}
-        onToggleTodo={handleToggleCopyTodo}
-      /> */}
     </div>
   );
 }
