@@ -8,7 +8,7 @@ function AppTodo(props) {
   const [todoText, setTodoText] = useState('');
   const [todos, dispatch] = useImmerReducer(todoReducer, [
     {id: 0, text: "HTML&CSS 공부하기", done: false },
-    {id: 1, text: "자바스크립트 공부하기", done: false },
+    {id: 1, text: "자바스크립트 공부하기", done: false }, 
   ]);
   const [insertAt, setInsertAt] = useState(todos.length - 1);
 
@@ -65,6 +65,11 @@ function AppTodo(props) {
       type: 'reverse'
     })
   }
+  const handleAddTodoOnEnter = (e) => {
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
+      handleAddTodo();
+    }
+  }
 
   // const handleToggleCopyTodo = (id, done) => {
   //   const nextTodos = [...copyTodos];
@@ -81,7 +86,8 @@ function AppTodo(props) {
           type="text"
           value={todoText}
           onChange={handleTodoTextChange}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleAddTodoOnEnter}
+          
         />
         <button onClick={handleAddTodo}>추가</button>
       </div>
