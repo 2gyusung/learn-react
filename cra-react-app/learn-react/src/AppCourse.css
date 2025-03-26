@@ -32,11 +32,9 @@ main {
 }
 
 /* Course List */
-.course {
+.courses {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
+  flex-direction: column;
 }
 
 /* Course */
@@ -44,6 +42,7 @@ main {
   display: flex;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
 }
 .course__img {
   border-radius: 6px;
@@ -81,23 +80,17 @@ main {
 .btn > .fa-link {
   color: #393939;
 }
-.icon-heart {
-  width: 20px;
-  color: red;
-}
-/* ... 생략 ... */
 .btn__img {
   width: 20px;
-  color: red;
 }
 
-/* divider */
 .divider {
-  border: none;
-  background-color: #e2e2e2;
-  height: 1px;
-  margin: 16px 0;
+  border: none; /* 기본 테두리 제거 */
+  height: 1px; /* 선의 높이 */
+  background-color: #e2e2e2; /* 선의 색상 */
+  margin: 16px 0; /* 위아래 여백 설정 */
 }
+
 
 /* input */
 input[type=text], select {
